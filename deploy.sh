@@ -20,7 +20,7 @@ killTomcat()
         kill -9 $pid
     fi
 }
-cd $PROJ_PATH/sshblog
+cd $PROJ_PATH/x-boot
 mvn clean install
 
 # 停tomcat
