@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#编译+部署sshblog站点
+#编译+部署xboot站点
 
 #需配置如下参数
 # 项目路径,在Execute Shell中配置项目路径, pwd 就可以获得该项目路径
@@ -29,13 +29,13 @@ killTomcat
 # 删除原有工程
 rm -rf $TOMCAT_APP_PATH/webapps/ROOT
 rm -r $TOMCAT_APP_PATH/webapps/ROOT.war
-rm -r $TOMCAT_APP_PATH/webapps/sshblog.war
+rm -r $TOMCAT_APP_PATH/webapps/xboot.war
 
 # 复制新的工程
-cp $PROJ_PATH/sshblog/target/sshblog.war $TOMCAT_APP_PATH/webapps/
+cp $PROJ_PATH/xboot/target/xboot.war $TOMCAT_APP_PATH/webapps/
 
 cd $TOMCAT_APP_PATH/webapps/
-mv sshblog.war ROOT.war
+mv xboot.war ROOT.war
 
 # 启动Tomcat
 cd $TOMCAT_APP_PATH/
