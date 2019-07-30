@@ -29,10 +29,10 @@ killTomcat
 # 删除原有工程
 rm -rf $TOMCAT_APP_PATH/webapps/ROOT
 rm -r $TOMCAT_APP_PATH/webapps/ROOT.war
-rm -r $TOMCAT_APP_PATH/webapps/xboot.war
+rm -r $TOMCAT_APP_PATH/webapps/x-boot.war
 
 # 复制新的工程
-cp $PROJ_PATH/xboot/target/xboot.war $TOMCAT_APP_PATH/webapps/
+cp $PROJ_PATH/xboot/target/x-boot.war $TOMCAT_APP_PATH/webapps/
 
 cd $TOMCAT_APP_PATH/webapps/
 mv xboot.war ROOT.war
