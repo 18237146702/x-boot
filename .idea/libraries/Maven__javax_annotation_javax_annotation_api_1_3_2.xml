@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2-sources.jar!/" />
     </SOURCES>

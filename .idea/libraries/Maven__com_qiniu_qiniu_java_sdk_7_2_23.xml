@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/qiniu/qiniu-java-sdk/7.2.23/qiniu-java-sdk-7.2.23.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/qiniu/qiniu-java-sdk/7.2.23/qiniu-java-sdk-7.2.23-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/qiniu/qiniu-java-sdk/7.2.23/qiniu-java-sdk-7.2.23-sources.jar!/" />
     </SOURCES>

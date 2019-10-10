@@ -35,7 +35,7 @@ rm -r $TOMCAT_APP_PATH/webapps/x-boot.war
 cp $PROJ_PATH/xboot/target/x-boot.war $TOMCAT_APP_PATH/webapps/
 
 cd $TOMCAT_APP_PATH/webapps/
-mv xboot.war ROOT.war
+mv x-boot.war ROOT.war
 
 # 启动Tomcat
 cd $TOMCAT_APP_PATH/

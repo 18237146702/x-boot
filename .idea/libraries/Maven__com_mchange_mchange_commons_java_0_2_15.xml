@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/mchange/mchange-commons-java/0.2.15/mchange-commons-java-0.2.15.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/mchange/mchange-commons-java/0.2.15/mchange-commons-java-0.2.15-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/mchange/mchange-commons-java/0.2.15/mchange-commons-java-0.2.15-sources.jar!/" />
     </SOURCES>

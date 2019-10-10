@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/org/apache/xmlgraphics/fop/0.94/fop-0.94.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/org/apache/xmlgraphics/fop/0.94/fop-0.94-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/org/apache/xmlgraphics/fop/0.94/fop-0.94-sources.jar!/" />
     </SOURCES>

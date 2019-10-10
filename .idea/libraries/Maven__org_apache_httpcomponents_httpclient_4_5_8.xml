@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/org/apache/httpcomponents/httpclient/4.5.8/httpclient-4.5.8.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/org/apache/httpcomponents/httpclient/4.5.8/httpclient-4.5.8-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/org/apache/httpcomponents/httpclient/4.5.8/httpclient-4.5.8-sources.jar!/" />
     </SOURCES>

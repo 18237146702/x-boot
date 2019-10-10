@@ -42,7 +42,7 @@ public class XbootGenerator {
      * 数据库表名前缀
      * 下方请根据需要修改
      */
-    private static final String tablePre = "t_";
+    private static final String tablePre = "act_";
 
     /**
      * 主键类型

@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/ibeetl/beetl/2.9.9/beetl-2.9.9.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/ibeetl/beetl/2.9.9/beetl-2.9.9-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/com/ibeetl/beetl/2.9.9/beetl-2.9.9-sources.jar!/" />
     </SOURCES>

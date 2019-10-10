@@ -3,9 +3,7 @@
     <CLASSES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/io/swagger/swagger-models/1.5.13/swagger-models-1.5.13.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/io/swagger/swagger-models/1.5.13/swagger-models-1.5.13-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://D:/sinitek/apache-maven-3.6.1/repository/io/swagger/swagger-models/1.5.13/swagger-models-1.5.13-sources.jar!/" />
     </SOURCES>

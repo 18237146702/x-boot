@@ -39,7 +39,7 @@ spring:
   jpa:
     show-sql: true
     # 自动生成表结构
-    generate-ddl: true
+    generate-ddl: false
     hibernate:
       ddl-auto: none
   # Redis
@@ -51,6 +51,13 @@ spring:
     port: 6379
     # 超时时间 Duration类型 3秒
     timeout: 3S
+  activiti:
+      check-process-definitions: false
+      db-identity-used: true
+      # 自动生成Activiti相关表 第一次生成后建议关闭提高运行速度
+      database-schema-update: false
+      # 保存历史数据级别设置为full最高级别，便于历史数据的追溯
+      history-level: full
   # Elasticsearch
   data:
     elasticsearch:
@@ -135,6 +142,7 @@ ignored:
     - /**/*.png
     - /**/*.ico
     - /test/**
+    - /**
 
 # Swagger界面内容配置
 swagger:

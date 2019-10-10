@@ -19,7 +19,7 @@
 'use strict';
 
 var ACTIVITI = ACTIVITI || {};
-
+//修改 resources目录下的app-cfg.js, 如下更改(这个是项目的路径，springboot是不需要项目路径的，所以把项目路径删除掉)
 ACTIVITI.CONFIG = {
-	'contextRoot' : '/xboot/act',
+	'contextRoot' : '/service',
 };
