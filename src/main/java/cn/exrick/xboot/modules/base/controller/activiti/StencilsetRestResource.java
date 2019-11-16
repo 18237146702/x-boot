@@ -1,5 +1,5 @@
 
-package cn.exrick.xboot.modules.activiti;
+package cn.exrick.xboot.modules.base.controller.activiti;
 
 import org.activiti.engine.ActivitiException;
 import org.apache.commons.io.IOUtils;
