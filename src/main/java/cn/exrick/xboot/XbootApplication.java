@@ -24,6 +24,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class XbootApplication {
 
     public static void main(String[] args) {
+    	System.out.println("git 与家里测试-----");
         SpringApplication.run(XbootApplication.class, args);
     }
 }
