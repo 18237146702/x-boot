@@ -1,4 +1,4 @@
-package cn.exrick.xboot;
+﻿package cn.exrick.xboot;
 
 import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +24,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class XbootApplication {
 
     public static void main(String[] args) {
-    	System.out.println("git 与家里测试再次提交-----");
         SpringApplication.run(XbootApplication.class, args);
     }
 }
