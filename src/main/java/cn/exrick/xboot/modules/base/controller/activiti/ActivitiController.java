@@ -1,4 +1,4 @@
-package cn.exrick.xboot.modules.base.controller.manage;
+package cn.exrick.xboot.modules.base.controller.activiti;
 
 import cn.exrick.xboot.common.utils.ResultUtil;
 import cn.exrick.xboot.common.vo.Result;

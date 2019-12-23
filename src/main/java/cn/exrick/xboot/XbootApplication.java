@@ -1,4 +1,4 @@
-﻿package cn.exrick.xboot;
+package cn.exrick.xboot;
 
 import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.boot.SpringApplication;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.exrick.xboot.modules.base.dao.mapper.ApplyLeaveMapper">
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, PROCESS_INSTANCE_ID, TITLE, USER_ID, USER_NAME, DAYS, START_TIME, END_TIME, LEAVE_TYPE, REASON, STATUS, CREATE_TIME, UPDATE_TIME, SUBMIT_TIME
+    </sql>
+
+</mapper>
