@@ -2,6 +2,7 @@ package cn.exrick.xboot.modules.base.service.activiti;
 
 import cn.exrick.xboot.base.XbootBaseService;
 import cn.exrick.xboot.modules.base.entity.activiti.ApplyLeaveEntity;
+import cn.exrick.xboot.modules.base.entity.activiti.dto.LeaveApplyDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.cache.annotation.CacheConfig;
 
@@ -26,7 +27,7 @@ public interface IApplyLeaveService extends IService<ApplyLeaveEntity> {
     //PageUtils queryMyApplyPage(Map<String, Object> params);
 
     /**
-     * 提交申请
+     * 新增申请
      *
      * @param applyLeaveEntity
      */
@@ -38,6 +39,12 @@ public interface IApplyLeaveService extends IService<ApplyLeaveEntity> {
      * @return
      */
     List<ApplyLeaveEntity> getAll(ApplyLeaveEntity applyLeaveEntity);
+
+    /**
+     * 提交申请
+     * @param leaveApplyDTO
+     */
+    void apply(LeaveApplyDTO leaveApplyDTO);
     /**
      * 提交申请
      *

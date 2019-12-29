@@ -5,7 +5,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        ID, PROCESS_INSTANCE_ID, TITLE, USER_ID, USER_NAME, DAYS, START_TIME, END_TIME, LEAVE_TYPE, REASON, STATUS, CREATE_TIME, UPDATE_TIME, SUBMIT_TIME
+        id, process_instance_id, title, user_id, user_name, days, start_time, end_time, leave_type, reason, status, create_time, update_time, submit_time
     </sql>
 
 </mapper>

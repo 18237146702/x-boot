@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `it_leave` (
   `leave_type` varchar(40) DEFAULT NULL,
   `reason` varchar(1000) DEFAULT NULL,
   `status` tinyint(3) DEFAULT NULL,
-  `caeate_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` timestamp NULL DEFAULT NULL,
   `submit_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ID`)

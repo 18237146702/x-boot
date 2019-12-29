@@ -28,7 +28,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("IT_LEAVE")
+@TableName("it_leave")
 public class ApplyLeaveEntity implements Serializable {
 
     //value与数据库主键列名一致，若实体类属性名与表主键列名一致可省略value
@@ -36,29 +36,34 @@ public class ApplyLeaveEntity implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private String id;
 
-    //若没有开启驼峰命名，或者表中列名不符合驼峰规则，可通过该注解指定数据库表中的列名，exist标明数据表中有没有对应列
-    @TableField(value = "process_Instance_Id",exist = true)
+    //若没有开启驼峰命名，或者表中列名不符合驼峰规则，可通过该注解指定数据库表中的列名，exist标明数据表中有没有对应列  默认: true
+    @TableField(value = "process_instance_id")
     private String processInstanceId;
 
     @NotBlank(message = "标题不能为空", groups = {AddGroup.class, UpdateGroup.class})
     private String title;
 
     @NotBlank(message = "用户ID不能为空", groups = AddGroup.class)
+    @TableField(value = "user_id")
     private String userId;
 
+    @TableField(value = "user_name")
     private String userName;
 
     private Integer days;
 
     @NotNull(message = "开始时间不能为空", groups = {AddGroup.class, UpdateGroup.class})
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "start_time")
     private Timestamp startTime;
 
     @NotNull(message = "结束时间不能为空", groups = {AddGroup.class, UpdateGroup.class})
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "end_time")
     private Timestamp endTime;
 
     @NotBlank(message = "请假类型不能为空", groups = {AddGroup.class, UpdateGroup.class})
+    @TableField(value = "leave_type")
     private String leaveType;
 
     private String reason;
@@ -67,14 +72,17 @@ public class ApplyLeaveEntity implements Serializable {
 
     @ApiModelProperty(value = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "create_time")
     private Timestamp createTime;
 
     @ApiModelProperty(value = "更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "update_time")
     private Timestamp updateTime;
 
     @ApiModelProperty(value = "提交时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "submit_time")
     private Timestamp submitTime;
 
     @ApiModelProperty(value = "流程任务")

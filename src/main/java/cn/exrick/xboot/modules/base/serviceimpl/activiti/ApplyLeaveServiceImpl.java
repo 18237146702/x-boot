@@ -1,12 +1,21 @@
 package cn.exrick.xboot.modules.base.serviceimpl.activiti;
 
 import cn.exrick.xboot.common.constant.ActivitiConstant;
+import cn.exrick.xboot.common.exception.YYException;
 import cn.exrick.xboot.modules.base.dao.activiti.ApplyLeaveDao;
 import cn.exrick.xboot.modules.base.dao.mapper.ApplyLeaveMapper;
 import cn.exrick.xboot.modules.base.entity.activiti.ApplyLeaveEntity;
+import cn.exrick.xboot.modules.base.entity.activiti.dto.LeaveApplyDTO;
 import cn.exrick.xboot.modules.base.service.activiti.IApplyLeaveService;
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.engine.HistoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,9 +36,14 @@ import java.util.Map;
 @Service
 @Transactional
 public class ApplyLeaveServiceImpl extends ServiceImpl<ApplyLeaveMapper,ApplyLeaveEntity> implements IApplyLeaveService {
+    @Autowired
+    private RuntimeService runtimeService;
 
     @Autowired
     private ApplyLeaveMapper applyLeaveMapper;
+
+    @Autowired
+    private HistoryService historyService;
 //    @Override
 //    public PageUtils queryMyApplyPage(Map<String, Object> params) {
 //        String userId = (String) params.get("userId");
@@ -83,42 +97,43 @@ public class ApplyLeaveServiceImpl extends ServiceImpl<ApplyLeaveMapper,ApplyLea
     @Override
     public List<ApplyLeaveEntity> getAll(ApplyLeaveEntity applyLeaveEntity) {
         Map map = new HashMap();
-        map.put("title",applyLeaveEntity.getTitle());
-        map.put("leave_Type",applyLeaveEntity.getLeaveType());
+        if(StringUtils.isNotEmpty(applyLeaveEntity.getTitle())){
+            map.put("title",applyLeaveEntity.getTitle());
+        }
+        if(StringUtils.isNotEmpty(applyLeaveEntity.getLeaveType())){
+            map.put("leave_type",applyLeaveEntity.getLeaveType());
+        }
         return applyLeaveMapper.selectByMap(map);
     }
 
-//    @Transactional(rollbackFor = Exception.class)
-//    @Override
-//    public Result apply(LeaveApplyDTO leaveApplyDTO) {
-//        String businessKey = ActivitiConstant.LEAVE_BUSINESSKEY + leaveApplyDTO.getId();
-//        // 参数
-//        Map<String, Object> variables = Maps.newHashMap();
-//        variables.put("users", leaveApplyDTO.getUsers());
-//        // 校验重复提交
-//        checkRepeatSubmit(businessKey);
-//
-//        ProcessInstance processInstance;
-//        try {
-//            // 启动流程
-//            processInstance = runtimeService.startProcessInstanceByKey(ActivitiConstant.LEAVE_KEY, businessKey, variables);
-//            String processInstanceId = processInstance.getId();
-//            // 更新业务
-//            LeaveEntity leaveEntity = new LeaveEntity();
-//            leaveEntity.setId(leaveApplyDTO.getId());
-//            leaveEntity.setProcessInstanceId(processInstanceId);
-//            leaveEntity.setUpdateTime(DateUtil.date().toTimestamp());
-//            leaveEntity.setSubmitTime(DateUtil.date().toTimestamp());
-//            leaveEntity.setStatus(ActivitiConstant.ORDER_STATUS_SUBMIT);
-//            baseMapper.updateById(leaveEntity);
-//            log.info("start process key={}, businessKey={}, pid={}, variables={}", ActivitiConstant.LEAVE_KEY, businessKey,
-//                    processInstanceId, variables);
-//        } catch (Exception e) {
-//            throw new YYException("流程启动失败", e);
-//        }
-//
-//        return Result.ok();
-//    }
+    @Override
+    public void apply(LeaveApplyDTO leaveApplyDTO) {
+        String businessKey = ActivitiConstant.LEAVE_BUSINESSKEY + leaveApplyDTO.getId();
+        // 参数
+        Map<String, Object> variables = Maps.newHashMap();
+        variables.put("users", leaveApplyDTO.getUsers());
+        // 校验重复提交
+        checkRepeatSubmit(businessKey);
+
+        ProcessInstance processInstance;
+        try {
+            // 启动流程
+            processInstance = runtimeService.startProcessInstanceByKey(ActivitiConstant.LEAVE_KEY, businessKey, variables);
+            String processInstanceId = processInstance.getId();
+            // 更新业务
+            ApplyLeaveEntity applyLeaveEntity = new ApplyLeaveEntity();
+            applyLeaveEntity.setId(leaveApplyDTO.getId());
+            applyLeaveEntity.setProcessInstanceId(processInstanceId);
+            applyLeaveEntity.setUpdateTime(DateUtil.date().toTimestamp());
+            applyLeaveEntity.setSubmitTime(DateUtil.date().toTimestamp());
+            applyLeaveEntity.setStatus(ActivitiConstant.ORDER_STATUS_SUBMIT);
+            baseMapper.updateById(applyLeaveEntity);
+            log.info("start process key={}, businessKey={}, pid={}, variables={}", ActivitiConstant.LEAVE_KEY, businessKey,
+                    processInstanceId, variables);
+        } catch (Exception e) {
+            throw new YYException("流程启动失败", e);
+        }
+    }
 //
 //    @Override
 //    public PageUtils queryTodoPage(Map<String, Object> params) {
@@ -414,27 +429,27 @@ public class ApplyLeaveServiceImpl extends ServiceImpl<ApplyLeaveMapper,ApplyLea
 //        return Result.ok();
 //    }
 //
-//    /**
-//     * 校验工单重复提交
-//     *
-//     * @param businessKey
-//     */
-//    private void checkRepeatSubmit(String businessKey) {
-//        ProcessInstance pi = runtimeService.createProcessInstanceQuery()
-//                .processInstanceBusinessKey(businessKey)
-//                .singleResult();
-//        if (pi != null) {
-//            throw new YYException("流程启动失败: 工单已存在，请勿重复提交！ProcessInstanceId：" + pi.getId());
-//        }
-//        HistoricProcessInstance historyProcessInstance = historyService.createHistoricProcessInstanceQuery()
-//                .processInstanceBusinessKey(businessKey)
-//                .singleResult();
-//        if (historyProcessInstance != null) {
-//            throw new YYException("流程启动失败: 工单已存在，请勿重复提交！ProcessInstanceId：" +
-//                    historyProcessInstance.getId());
-//        }
-//    }
-//
+    /**
+     * 校验工单重复提交
+     *
+     * @param businessKey
+     */
+    private void checkRepeatSubmit(String businessKey) {
+        ProcessInstance pi = runtimeService.createProcessInstanceQuery()
+                .processInstanceBusinessKey(businessKey)
+                .singleResult();
+        if (pi != null) {
+            throw new YYException("流程启动失败: 工单已存在，请勿重复提交！ProcessInstanceId：" + pi.getId());
+        }
+        HistoricProcessInstance historyProcessInstance = historyService.createHistoricProcessInstanceQuery()
+                .processInstanceBusinessKey(businessKey)
+                .singleResult();
+        if (historyProcessInstance != null) {
+            throw new YYException("流程启动失败: 工单已存在，请勿重复提交！ProcessInstanceId：" +
+                    historyProcessInstance.getId());
+        }
+    }
+
 //    /**
 //     * 获取businessID
 //     *
