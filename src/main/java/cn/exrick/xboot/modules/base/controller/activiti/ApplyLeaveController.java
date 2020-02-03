@@ -7,6 +7,7 @@ import cn.exrick.xboot.common.validator.AddGroup;
 import cn.exrick.xboot.common.validator.ValidatorUtils;
 import cn.exrick.xboot.common.vo.Result;
 import cn.exrick.xboot.modules.base.entity.activiti.ApplyLeaveEntity;
+import cn.exrick.xboot.modules.base.entity.activiti.dto.LeaveApplyDTO;
 import cn.exrick.xboot.modules.base.service.activiti.IApplyLeaveService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,13 +39,18 @@ public class ApplyLeaveController extends BaseController {
         // 默认管理员方便测试
         applyLeaveEntity.setUserId("1");
         applyLeaveEntity.setUserName("admin");
-        // 校验
-        ValidatorUtils.validateEntity(applyLeaveEntity, AddGroup.class);
         // 保存
         leaveService.saveLeave(applyLeaveEntity);
-
         return new ResultUtil<Object>().setSuccessMsg("保存成功");
     }
+
+    @ApiOperation(value = "提交申请", notes = "提交申请")
+    @RequestMapping(value = "/applyLeave",method = RequestMethod.POST)
+    public Result applyLeave(@ModelAttribute LeaveApplyDTO leaveApplyDTO) {
+        leaveService.apply(leaveApplyDTO);
+        return new ResultUtil<Object>().setSuccessMsg("保存成功");
+    }
+
 
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)
     @ApiOperation(value = "获取全部申请")
@@ -55,4 +61,12 @@ public class ApplyLeaveController extends BaseController {
         }
         return new ResultUtil<List<ApplyLeaveEntity>>().setErrorMsg("获取数据为空");
     }
+
+    @ApiOperation(value = "删除申请")
+    @RequestMapping(value = "/deleteLeave/{id}",method = RequestMethod.POST)
+    public Result<Object> deleteLeave(@PathVariable String id){
+        leaveService.removeById(id);
+        return new ResultUtil<Object>().setData(id);
+    }
+
 }

@@ -27,4 +27,10 @@ public interface IActReModelService {
      * @return
      */
     List<ActReModelEntity> findByModelList();
+
+    /**
+     * 部署模型发布
+     * @param id
+     */
+    void deploy(String id);
 }

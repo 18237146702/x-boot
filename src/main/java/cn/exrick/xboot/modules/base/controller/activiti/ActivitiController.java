@@ -20,7 +20,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@Api(description = "工作流接口")
+@Api("工作流接口")
 @RequestMapping("/xboot/activiti")
 @Transactional
 public class ActivitiController {
@@ -33,6 +33,13 @@ public class ActivitiController {
     public Result addModel(@ModelAttribute ActReModelEntity actReModel){
         String modelId = actReModelService.saveReModel(actReModel);
         return new ResultUtil<String>().setData(modelId);
+    }
+
+    @RequestMapping(value = "/deployModel/{id}",method = RequestMethod.POST)
+    @ApiOperation(value = "部署模型发布")
+    public Result deployModel(@PathVariable String id){
+        actReModelService.deploy(id);
+        return new ResultUtil<String>().setData(id);
     }
 
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)

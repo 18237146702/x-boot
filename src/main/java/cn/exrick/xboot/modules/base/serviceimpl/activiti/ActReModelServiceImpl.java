@@ -1,21 +1,27 @@
 package cn.exrick.xboot.modules.base.serviceimpl.activiti;
 
-import cn.exrick.xboot.common.exception.XbootException;
+import cn.exrick.xboot.common.constant.ActivitiConstant;
+import cn.exrick.xboot.common.exception.YYException;
 import cn.exrick.xboot.modules.base.entity.activiti.ActReModelEntity;
 import cn.exrick.xboot.modules.base.service.activiti.IActReModelService;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.bpmn.converter.BpmnXMLConverter;
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
+import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
-import org.apache.commons.logging.Log;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -80,5 +86,30 @@ public class ActReModelServiceImpl implements IActReModelService {
     @Override
     public List<ActReModelEntity> findByModelList() {
         return null;
+    }
+
+    @Override
+    public void deploy(String id) {
+        Model modelData = repositoryService.getModel(id);
+        BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
+        JsonNode editor = null;
+        try {
+            editor = new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelData.getId()));
+        } catch (IOException e) {
+            throw new YYException("部署解析失败", e);
+        }
+        BpmnModel bpmnModel = jsonConverter.convertToBpmnModel(editor);
+        BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
+        byte[] bpmnBytes = xmlConverter.convertToXML(bpmnModel);
+
+        String processName = modelData.getName();
+        if (!StringUtils.endsWith(processName, ActivitiConstant.BPMN20)) {
+            processName += ActivitiConstant.BPMN20;
+        }
+        ByteArrayInputStream in = new ByteArrayInputStream(bpmnBytes);
+        Deployment deployment = repositoryService.createDeployment()
+                .name(modelData.getName())
+                .addInputStream(processName, in)
+                .deploy();
     }
 }
